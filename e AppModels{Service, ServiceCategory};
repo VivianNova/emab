@@ -1,0 +1,69 @@
+[90m= [39m[34;4mIlluminate\Database\Eloquent\Collection[39;24m {#8755
+    [34mall[39m: [
+      [34;4mApp\Models\ServiceCategory[39;24m {#8768
+        [34mid[39m: [35m1[39m,
+        [34mname[39m: [32m"[39m[32mResidential Electrical[39m[32m"[39m,
+        [34msort_order[39m: [35m1[39m,
+      },
+      [34;4mApp\Models\ServiceCategory[39;24m {#8769
+        [34mid[39m: [35m2[39m,
+        [34mname[39m: [32m"[39m[32mCommercial & Industrial[39m[32m"[39m,
+        [34msort_order[39m: [35m2[39m,
+      },
+      [34;4mApp\Models\ServiceCategory[39;24m {#8766
+        [34mid[39m: [35m3[39m,
+        [34mname[39m: [32m"[39m[32mSolar & Renewable Energy[39m[32m"[39m,
+        [34msort_order[39m: [35m3[39m,
+      },
+      [34;4mApp\Models\ServiceCategory[39;24m {#8765
+        [34mid[39m: [35m4[39m,
+        [34mname[39m: [32m"[39m[32mLighting[39m[32m"[39m,
+        [34msort_order[39m: [35m4[39m,
+      },
+      [34;4mApp\Models\ServiceCategory[39;24m {#8764
+        [34mid[39m: [35m5[39m,
+        [34mname[39m: [32m"[39m[32mSecurity & Safety Systems[39m[32m"[39m,
+        [34msort_order[39m: [35m5[39m,
+      },
+      [34;4mApp\Models\ServiceCategory[39;24m {#8763
+        [34mid[39m: [35m6[39m,
+        [34mname[39m: [32m"[39m[32mInspection, Testing & Compliance[39m[32m"[39m,
+        [34msort_order[39m: [35m6[39m,
+      },
+      [34;4mApp\Models\ServiceCategory[39;24m {#8762
+        [34mid[39m: [35m7[39m,
+        [34mname[39m: [32m"[39m[32mMaintenance & Repair[39m[32m"[39m,
+        [34msort_order[39m: [35m7[39m,
+      },
+      [34;4mApp\Models\ServiceCategory[39;24m {#8761
+        [34mid[39m: [35m8[39m,
+        [34mname[39m: [32m"[39m[32mDomestic Lighting[39m[32m"[39m,
+        [34msort_order[39m: [35m2[39m,
+      },
+      [34;4mApp\Models\ServiceCategory[39;24m {#8760
+        [34mid[39m: [35m9[39m,
+        [34mname[39m: [32m"[39m[32mCommercial and Industrial Electrical[39m[32m"[39m,
+        [34msort_order[39m: [35m2[39m,
+      },
+      [34;4mApp\Models\ServiceCategory[39;24m {#8759
+        [34mid[39m: [35m10[39m,
+        [34mname[39m: [32m"[39m[32mSolar and Backup Power[39m[32m"[39m,
+        [34msort_order[39m: [35m3[39m,
+      },
+      [34;4mApp\Models\ServiceCategory[39;24m {#8758
+        [34mid[39m: [35m11[39m,
+        [34mname[39m: [32m"[39m[32mSecurity Systems and Electric Fencing[39m[32m"[39m,
+        [34msort_order[39m: [35m5[39m,
+      },
+      [34;4mApp\Models\ServiceCategory[39;24m {#8757
+        [34mid[39m: [35m12[39m,
+        [34mname[39m: [32m"[39m[32mSafety, Earthing and Fault Finding[39m[32m"[39m,
+        [34msort_order[39m: [35m6[39m,
+      },
+      [34;4mApp\Models\ServiceCategory[39;24m {#8756
+        [34mid[39m: [35m13[39m,
+        [34mname[39m: [32m"[39m[32mMaintenance and Repairs[39m[32m"[39m,
+        [34msort_order[39m: [35m7[39m,
+      },
+    ],
+  }

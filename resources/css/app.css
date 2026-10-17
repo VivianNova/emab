@@ -1,0 +1,28 @@
+@import 'tailwindcss';
+@import 'bootstrap-icons/font/bootstrap-icons.css';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+    --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+
+    --color-brand-blue: #0B72C8;
+    --color-brand-blue-hover: #095AA0;
+    --color-brand-navy: #0B3A73;
+    --color-brand-navy-light: #1e293b;
+    --color-brand-red: #DC1F26;
+    --color-brand-red-hover: #B91820;
+    --color-brand-sky: #1595D8;
+    --color-brand-tint: #E8F4FB;
+    --color-brand-whatsapp: #25d366;
+}
+.star-rating input { position: absolute; opacity: 0; pointer-events: none; }
+.star-rating label { cursor: pointer; font-size: 1.75rem; line-height: 1; color: var(--color-slate-300); transition: transform 0.15s; }
+.star-rating label:hover { transform: scale(1.1); }
+.star-rating label:hover,
+.star-rating label:hover ~ label,
+.star-rating input:checked ~ label { color: var(--color-amber-500); }
+.star-rating input:focus-visible + label { outline: 2px solid var(--color-brand-blue); border-radius: 0.25rem; }
