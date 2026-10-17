@@ -1,58 +1,187 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# EMAB Electrical
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Website for **EMAB Electrical**, an electrical services company based in **Bungoma town** and serving **Mumias, Kakamega, Busia** and surrounding areas.
 
-## About Laravel
+> Delivering results, Exceeding Expectations
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+The site is services-only. There is no shop and no online payment. The one thing visitors do is **request a quote**, and the team follows up by phone, WhatsApp or email.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+---
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Features
 
-## Learning Laravel
+**Public site**
+- Home page with a hero carousel, quick quote form, services, areas served, how-it-works steps, projects and testimonials
+- Services page (one block per category) and a detail page for each service
+- Projects page with category filter and search (shown once there are enough projects) and a gallery page for each project
+- About and Contact pages
+- Request a Quote page, also available from the home page and from each service page
+- Floating WhatsApp button and a scroll-to-top button
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+**Quote requests**
+- Saved to the database with a status, starting at `new`
+- Honeypot field to block bots
+- Optional photo or plan upload, stored on the **private disk** (never public)
+- Email notifications to the team
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+**Admin**
+- Login with roles: super admin and admin
+- Manage services, categories, projects, testimonials, quote requests and site settings
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+**Content stays editable**
+- Phone, WhatsApp, company name and other details come from the **settings** table
+- Service areas come from `config/emab.php`, so locations are changed in one place
 
-## Agentic Development
+---
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+## Tech stack
+
+- Laravel (PHP)
+- Blade templates
+- Tailwind CSS with custom `brand-*` colours taken from the logo
+- Vite
+- Bootstrap Icons (`bi bi-*`)
+- Database configured in `.env`
+- Hosting target: shared cPanel hosting
+
+---
+
+## Getting started (local)
+
+Requirements: PHP, Composer, Node.js and npm, and a database.
 
 ```bash
-composer require laravel/boost --dev
+git clone https://github.com/VivianNova/emab.git
+cd emab
 
-php artisan boost:install
+composer install
+npm install
+
+cp .env.example .env
+php artisan key:generate
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+Open `.env` and set the database, mail and app URL values. Then:
 
-## Contributing
+```bash
+php artisan migrate
+php artisan storage:link
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Load the starter descriptions (optional, run only what you need):
 
-## Code of Conduct
+```bash
+php artisan db:seed --class=ServiceCategoryDescriptionSeeder
+php artisan db:seed --class=ServiceDescriptionSeeder
+php artisan db:seed --class=ProjectDescriptionSeeder
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Start the site:
 
-## Security Vulnerabilities
+```bash
+npm run dev
+php artisan serve
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Then open `http://127.0.0.1:8000`.
+
+---
+
+## Images are not in the repository
+
+Images are kept out of git (see `.gitignore`). After cloning, add them yourself:
+
+- `public/images/logo.png` is the logo, used in the header, footer and quotation PDF
+- `public/images/` holds the hero and section photos referenced in `resources/views/home.blade.php`
+- Photos uploaded through the admin are stored in `storage/app/public`. Run `php artisan storage:link` so they are served
+
+If a design image file is missing, the home page shows a plain navy block instead of a broken image.
+
+---
+
+## Configuration you will edit most
+
+| What | Where |
+|---|---|
+| Base town, service areas, area text | `config/emab.php` (run `php artisan config:clear` after editing) |
+| Company name, phone, WhatsApp, email | Settings in the admin (`company_name`, `phone`, `whatsapp`, `email`) |
+| Home page numbers strip | Settings: `stat_projects`, `stat_years`, `stat_clients`, `stat_areas` (any empty value is hidden) |
+| Hero slides and their photos | The `$slides` array at the top of `resources/views/home.blade.php` |
+| Brand colours | The `brand-*` tokens in the Tailwind config |
+
+WhatsApp numbers must be stored with the country code, no plus sign and no leading zero (for example `2547XXXXXXXX`).
+
+---
+
+## Project layout (key files)
+
+```
+app/Http/Controllers/
+    HomeController.php        Home page data
+    ServiceController.php     Services page and service detail
+    ProjectController.php     Projects page and project detail
+    QuoteController.php       Quote form and saving requests
+app/Models/                   Service, ServiceCategory, Project, QuoteRequest, Testimonial, ...
+config/emab.php               Base town and service areas
+database/seeders/             Description seeders
+resources/views/
+    home.blade.php, services.blade.php, service.blade.php,
+    projects.blade.php, project.blade.php, quote.blade.php
+    partials/                 cta, whatsapp, project-card, quote-success, ...
+```
+
+---
+
+## Deploying to cPanel
+
+1. Build the assets (`npm run build`) and upload the project, with `public/` as the web root (or its contents in `public_html` with `index.php` paths adjusted).
+2. Upload `public/images` and any files from `storage/app/public` separately, since git does not carry them.
+3. Create `.env` on the server with production values (`APP_ENV=production`, `APP_DEBUG=false`, database, mail).
+4. Run, from the project folder:
+
+```bash
+composer install --no-dev --optimize-autoloader
+php artisan migrate --force
+php artisan storage:link
+php artisan config:cache
+php artisan route:cache
+php artisan view:cache
+```
+
+5. If queued jobs or scheduled tasks are used, add a cron job that runs every minute:
+
+```
+* * * * * cd /home/USER/path-to-project && php artisan schedule:run >> /dev/null 2>&1
+```
+
+After a deploy that changes code, run `php artisan queue:restart` if queues are in use.
+
+Never commit `.env`. It holds the application key, database password and mail credentials.
+
+---
+
+## Roadmap
+
+**Done**
+- Public pages, quote requests and admin
+- Email notifications for quote requests
+- Brand styling, locations (Bungoma, Mumias, Kakamega, Busia) and description seeders
+
+**In progress / next**
+- **Quotations:** build a quotation in the admin or upload the CEO's own PDF, send it to the client with a secure expiring link, and track Accepted, Declined and Expired. Database tables, models and the branded PDF template are written. The admin form, send and status steps remain.
+- **Background tasks and caching:** reminders and follow-ups, cached home page data, deploy script
+- **AI chatbot:** 24/7 answers about services and areas, with lead capture into quote requests and handover to a person for hazards
+
+---
+
+## Security notes
+
+- `.env`, uploaded quote files and quotation documents must never be public.
+- Quote form uploads are validated and stored on the private disk, and downloaded only through logged-in admin routes.
+- Privacy consent is collected on the quote form. Keep the Privacy Policy page up to date with anything new that stores personal data.
+
+---
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Proprietary. All rights reserved by EMAB Electrical. This code is not open source.
